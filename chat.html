@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="CSS/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-comments"></i> Chat App</h2>
+                <div class="current-user">
+                    <span id="currentUsername">User</span>
+                    <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+
+            <!-- Chat Type Tabs -->
+            <div class="chat-tabs">
+                <button class="tab-btn active" data-chat="public">
+                    <i class="fas fa-globe"></i> Public Chat
+                </button>
+                <button class="tab-btn" data-chat="private">
+                    <i class="fas fa-user-friends"></i> Private Chat
+                </button>
+            </div>
+
+            <!-- Active Users List -->
+            <div class="users-section">
+                <h3><i class="fas fa-users"></i> Active Users</h3>
+                <div id="activeUsersList" class="users-list"></div>
+            </div>
+
+            <!-- All Users List (for private chat) -->
+            <div class="users-section" id="allUsersSection" style="display: none;">
+                <h3><i class="fas fa-user-friends"></i> All Users</h3>
+                <div id="allUsersList" class="users-list"></div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+            <div class="chat-header">
+                <h3 id="chatTitle">Public Chat</h3>
+                <div class="chat-info">
+                    <span id="chatWithUser"></span>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="messages" id="messagesList">
+                    <!-- Messages will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Message Options Menu -->
+            <div id="messageOptionsMenu" class="message-options-menu">
+                <div class="menu-item" data-action="reply">
+                    <i class="fas fa-reply"></i> <span>Reply</span>
+                </div>
+                <div class="menu-item" data-action="star">
+                    <i class="fas fa-star"></i> <span>Star</span>
+                </div>
+                <div class="menu-item" data-action="copy">
+                    <i class="fas fa-copy"></i> <span>Copy</span>
+                </div>
+                <div class="menu-item" data-action="forward">
+                    <i class="fas fa-share"></i> <span>Forward</span>
+                </div>
+                <div class="menu-item" data-action="delete">
+                    <i class="fas fa-trash"></i> <span>Delete</span>
+                </div>
+            </div>
+
+            <!-- Reply Preview -->
+            <div id="replyPreview" class="reply-preview" style="display: none;">
+                <div class="reply-preview-content">
+                    <div class="reply-preview-header">
+                        <i class="fas fa-reply"></i>
+                        <span class="reply-preview-username"></span>
+                    </div>
+                    <div class="reply-preview-text"></div>
+                </div>
+                <button type="button" class="reply-preview-close" id="cancelReply">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Message Input -->
+            <div class="message-input-container">
+                <button type="button" id="emojiBtn" class="emoji-btn">
+                    <i class="fas fa-smile"></i>
+                </button>
+                <div id="emojiPicker" class="emoji-picker">
+                    <div class="emoji-grid">
+                        <span class="emoji">😀</span>
+                        <span class="emoji">😃</span>
+                        <span class="emoji">😄</span>
+                        <span class="emoji">😁</span>
+                        <span class="emoji">😅</span>
+                        <span class="emoji">😂</span>
+                        <span class="emoji">🤣</span>
+                        <span class="emoji">😊</span>
+                        <span class="emoji">😇</span>
+                        <span class="emoji">🙂</span>
+                        <span class="emoji">🙃</span>
+                        <span class="emoji">😉</span>
+                        <span class="emoji">😌</span>
+                        <span class="emoji">😍</span>
+                        <span class="emoji">🥰</span>
+                        <span class="emoji">😘</span>
+                        <span class="emoji">😗</span>
+                        <span class="emoji">😙</span>
+                        <span class="emoji">😚</span>
+                        <span class="emoji">😋</span>
+                        <span class="emoji">😛</span>
+                        <span class="emoji">😜</span>
+                        <span class="emoji">😝</span>
+                        <span class="emoji">😎</span>
+                        <span class="emoji">🤩</span>
+                        <span class="emoji">🥳</span>
+                        <span class="emoji">😏</span>
+                        <span class="emoji">😒</span>
+                        <span class="emoji">😞</span>
+                        <span class="emoji">😔</span>
+                        <span class="emoji">😟</span>
+                        <span class="emoji">😕</span>
+                        <span class="emoji">🙁</span>
+                        <span class="emoji">😣</span>
+                        <span class="emoji">😖</span>
+                        <span class="emoji">😫</span>
+                        <span class="emoji">😩</span>
+                        <span class="emoji">🥺</span>
+                        <span class="emoji">😢</span>
+                        <span class="emoji">😭</span>
+                        <span class="emoji">😤</span>
+                        <span class="emoji">😠</span>
+                        <span class="emoji">😡</span>
+                        <span class="emoji">🤬</span>
+                        <span class="emoji">🤯</span>
+                        <span class="emoji">😳</span>
+                        <span class="emoji">🥵</span>
+                        <span class="emoji">🥶</span>
+                        <span class="emoji">😱</span>
+                        <span class="emoji">😨</span>
+                        <span class="emoji">😰</span>
+                        <span class="emoji">😥</span>
+                        <span class="emoji">😓</span>
+                        <span class="emoji">🤗</span>
+                        <span class="emoji">🤔</span>
+                        <span class="emoji">🤭</span>
+                        <span class="emoji">🤫</span>
+                        <span class="emoji">🤥</span>
+                        <span class="emoji">😶</span>
+                        <span class="emoji">😐</span>
+                        <span class="emoji">😑</span>
+                        <span class="emoji">😬</span>
+                        <span class="emoji">🙄</span>
+                        <span class="emoji">😯</span>
+                        <span class="emoji">😦</span>
+                        <span class="emoji">😧</span>
+                        <span class="emoji">😮</span>
+                        <span class="emoji">😲</span>
+                        <span class="emoji">🥱</span>
+                        <span class="emoji">😴</span>
+                        <span class="emoji">🤤</span>
+                        <span class="emoji">😪</span>
+                        <span class="emoji">😵</span>
+                        <span class="emoji">🤐</span>
+                        <span class="emoji">🥴</span>
+                        <span class="emoji">🤢</span>
+                        <span class="emoji">🤮</span>
+                        <span class="emoji">🤧</span>
+                        <span class="emoji">😷</span>
+                        <span class="emoji">🤒</span>
+                        <span class="emoji">🤕</span>
+                        <span class="emoji">🤑</span>
+                        <span class="emoji">🤠</span>
+                        <span class="emoji">😈</span>
+                        <span class="emoji">👿</span>
+                        <span class="emoji">👹</span>
+                        <span class="emoji">👺</span>
+                        <span class="emoji">🤡</span>
+                        <span class="emoji">💩</span>
+                        <span class="emoji">👻</span>
+                        <span class="emoji">💀</span>
+                        <span class="emoji">☠️</span>
+                        <span class="emoji">👽</span>
+                        <span class="emoji">👾</span>
+                        <span class="emoji">🤖</span>
+                        <span class="emoji">🎃</span>
+                        <span class="emoji">👍</span>
+                        <span class="emoji">👎</span>
+                        <span class="emoji">👌</span>
+                        <span class="emoji">✌️</span>
+                        <span class="emoji">🤞</span>
+                        <span class="emoji">🤟</span>
+                        <span class="emoji">🤘</span>
+                        <span class="emoji">🤙</span>
+                        <span class="emoji">👈</span>
+                        <span class="emoji">👉</span>
+                        <span class="emoji">👆</span>
+                        <span class="emoji">👇</span>
+                        <span class="emoji">☝️</span>
+                        <span class="emoji">👋</span>
+                        <span class="emoji">🤚</span>
+                        <span class="emoji">🖐</span>
+                        <span class="emoji">✋</span>
+                        <span class="emoji">🖖</span>
+                        <span class="emoji">👏</span>
+                        <span class="emoji">🙌</span>
+                        <span class="emoji">🤲</span>
+                        <span class="emoji">🤝</span>
+                        <span class="emoji">🙏</span>
+                        <span class="emoji">✍️</span>
+                        <span class="emoji">💪</span>
+                        <span class="emoji">🦾</span>
+                        <span class="emoji">🦿</span>
+                        <span class="emoji">🦵</span>
+                        <span class="emoji">🦶</span>
+                        <span class="emoji">👂</span>
+                        <span class="emoji">🦻</span>
+                        <span class="emoji">👃</span>
+                        <span class="emoji">🧠</span>
+                        <span class="emoji">🦷</span>
+                        <span class="emoji">🦴</span>
+                        <span class="emoji">👀</span>
+                        <span class="emoji">👁️</span>
+                        <span class="emoji">👅</span>
+                        <span class="emoji">👄</span>
+                        <span class="emoji">💋</span>
+                        <span class="emoji">💘</span>
+                        <span class="emoji">💝</span>
+                        <span class="emoji">💖</span>
+                        <span class="emoji">💗</span>
+                        <span class="emoji">💓</span>
+                        <span class="emoji">💞</span>
+                        <span class="emoji">💕</span>
+                        <span class="emoji">💟</span>
+                        <span class="emoji">❣️</span>
+                        <span class="emoji">💔</span>
+                        <span class="emoji">❤️</span>
+                        <span class="emoji">🧡</span>
+                        <span class="emoji">💛</span>
+                        <span class="emoji">💚</span>
+                        <span class="emoji">💙</span>
+                        <span class="emoji">💜</span>
+                        <span class="emoji">🖤</span>
+                        <span class="emoji">🤍</span>
+                        <span class="emoji">🤎</span>
+                        <span class="emoji">💯</span>
+                        <span class="emoji">💢</span>
+                        <span class="emoji">💥</span>
+                        <span class="emoji">💫</span>
+                        <span class="emoji">💦</span>
+                        <span class="emoji">💨</span>
+                        <span class="emoji">🕳️</span>
+                        <span class="emoji">💣</span>
+                        <span class="emoji">💬</span>
+                        <span class="emoji">👁️‍🗨️</span>
+                        <span class="emoji">🗨️</span>
+                        <span class="emoji">🗯️</span>
+                        <span class="emoji">💭</span>
+                        <span class="emoji">💤</span>
+                    </div>
+                </div>
+                <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
+                <button type="button" id="voiceBtn" class="voice-btn" title="Voice Message">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button type="button" id="sendBtn" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="JS/chat.js"></script>
+</body>
+</html>
+
